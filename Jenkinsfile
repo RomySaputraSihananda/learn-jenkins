@@ -21,14 +21,14 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    sh 'docker build -t vite-app:${IMAGE_VERSION} .'
+                    sh 'docker build -t vite-app:${env.IMAGE_VERSION} .'
                 }
             }
         }
         stage('deploy') {
             steps {
                 script {
-                    sh 'docker run --rm -d -p 3000:3000 -n vite-app vite-app:${IMAGE_VERSION}'
+                    sh 'docker run --rm -d -p 3000:3000 -n vite-app vite-app:${env.IMAGE_VERSION}'
                 }
             }
         }
