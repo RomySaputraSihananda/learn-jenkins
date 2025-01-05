@@ -5,7 +5,7 @@ pipeline {
         }
     }
     environment {
-        CHAT_ID = '-4661252133'
+        CHAT_ID = '-4570371101'
     }
     stages {
         stage('Get Version Input') {
@@ -40,9 +40,9 @@ pipeline {
         success {
             script {
                 sh """
-                curl -X POST https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage \
+                curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
                 -H "Content-Type: application/json" \
-                -d '{"chat_id": "${env.CHAT_ID}", "text": "Build and deployment succeeded for version ${env.IMAGE_VERSION}", "disable_notification": true}'
+                -d '{"chat_id": "${CHAT_ID}", "text": "Build and deployment succeeded for version ${IMAGE_VERSION}", "disable_notification": true}'
                 """
             }
         }
@@ -51,7 +51,7 @@ pipeline {
                 sh """
                 curl -X POST https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage \
                 -H "Content-Type: application/json" \
-                -d '{"chat_id": "${env.CHAT_ID}", "text": "Build or deployment failed for version ${env.IMAGE_VERSION}", "disable_notification": true}'
+                -d '{"chat_id": "${CHAT_ID}", "text": "Build or deployment failed for version ${IMAGE_VERSION}", "disable_notification": true}'
                 """
             }
         }
