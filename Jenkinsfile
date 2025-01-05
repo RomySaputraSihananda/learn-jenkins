@@ -14,21 +14,22 @@ pipeline {
                             string(name: 'IMAGE_VERSION', defaultValue: '1.0.0', description: 'Masukkan versi image yang diinginkan')
                         ]
                     )
-                    env.IMAGE_VERSION = userInput.IMAGE_VERSION
+                    echo userInput
+                    env.IMAGE_VERSION = userInput
                 }
             }
         }
         stage('build') {
             steps {
                 script {
-                    sh 'docker build -t vite-app:${env.IMAGE_VERSION} .'
+                    sh 'docker build -t vite-app:${IMAGE_VERSION} .'
                 }
             }
         }
         stage('deploy') {
             steps {
                 script {
-                    sh 'docker run --rm -d -p 3000:3000 -n vite-app vite-app:${env.IMAGE_VERSION}'
+                    sh 'docker run --rm -d -p 3000:3000 -n vite-app vite-app:${IMAGE_VERSION}'
                 }
             }
         }
