@@ -38,10 +38,10 @@ pipeline {
     }
     post {
         success {
-            sh 'curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -H "Content-Type: application/json" -d "{"chat_id": ${CHAT_ID}, "text": "build success", "disable_notification": true}"'
+            sh 'curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -H "Content-Type: application/json" -d "{"chat_id": "${CHAT_ID}", "text": "build success", "disable_notification": true}"'
         }
         failure {
-            sh 'curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -H "Content-Type: application/json" -d "{"chat_id": ${CHAT_ID}, "text": "build success", "disable_notification": true}"'
+            sh 'curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -H "Content-Type: application/json" -d "{"chat_id": "${CHAT_ID}", "text": "build failed", "disable_notification": true}"'
         }
     }
 }
