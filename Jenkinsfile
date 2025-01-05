@@ -15,7 +15,7 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    sh 'docker run -p 3000:3000 test'
+                    sh 'docker run --rm -d -p 3000:3000 test'
                 }
             }
         }
