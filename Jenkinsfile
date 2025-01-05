@@ -4,6 +4,9 @@ pipeline {
             label 'docker' 
         }
     }
+    environment {
+        CHAT_ID = '-4661252133'
+    }
     stages {
         stage('Get Version Input') {
             steps {
@@ -31,6 +34,14 @@ pipeline {
                     sh 'docker run --rm -d -p 3000:3000 --name vite-app vite-app:${IMAGE_VERSION}'
                 }
             }
+        }
+    }
+    post {
+        success {
+            sh 'curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -H "Content-Type: application/json" -d '{"chat_id": ${CHAT_ID}, "text": "build success", "disable_notification": true}'"
+        }
+        failure {
+            sh 'curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -H "Content-Type: application/json" -d '{"chat_id": ${CHAT_ID}, "text": "build success", "disable_notification": true}'"
         }
     }
 }
