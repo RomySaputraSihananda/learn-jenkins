@@ -37,6 +37,15 @@ pipeline {
         }
     }
     post {
+        always {
+            script {
+                sh """
+                curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
+                -H "Content-Type: application/json" \
+                -d '{"chat_id": "${CHAT_ID}", "text": "pipeline selesai", "disable_notification": true}'
+                """
+            }
+        }
         success {
             script {
                 sh """
