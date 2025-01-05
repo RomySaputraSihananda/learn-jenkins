@@ -4,7 +4,13 @@ pipeline {
             label 'docker' 
         }
     }
-    stage('build'){
-        docker build test .
+    stages {
+        stage('build') {
+            steps {
+                script {
+                    sh 'docker build -t test .'
+                }
+            }
+        }
     }
 }
