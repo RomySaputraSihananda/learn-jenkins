@@ -28,7 +28,7 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    sh 'docker run --rm -d -p 3000:3000 vite-app:${IMAGE_VERSION}'
+                    sh 'docker run --rm -d -p 3000:3000 -n vite-app vite-app:${IMAGE_VERSION}'
                 }
             }
         }
